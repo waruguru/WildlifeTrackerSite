@@ -1,50 +1,56 @@
-# Wildlife Tracker
-#### Wildlife Tracker, April 28th 2019
-#### By **Peter Wachira**
-![](screenshots/screenshot1.png)
-![]()
-## Description
+# Wildlife_Tracker
 
-```bash
-An application that allows Rangers to track wildlife sightings in the area.
-```
-## Technologies Used
-[![forthebadge](https://forthebadge.com/images/badges/powered-by-electricity.svg)](https://forthebadge.com)
-[![forthebadge](https://forthebadge.com/images/badges/made-with-java.svg)](https://forthebadge.com)
-[![forthebadge](https://forthebadge.com/images/badges/uses-html.svg)](https://forthebadge.com)
-[![forthebadge](https://forthebadge.com/images/badges/uses-css.svg)](https://forthebadge.com)
+### By Muriithi Joyce
 
-## Installation
-* `git clone <https://github.com/peter-wachira/WildlifeTracker.git>` this repository
-* `cd WildlifeTracker`
+## Description :notebook:
 
-## SQL
-```bash
-1.Launch postgres
-2.Type in psql
-Run these commands
-3. CREATE DATABASE wildlife_tracker;
-4. \c wildlife_tracker;
-5. CREATE TABLE animals (id serial PRIMARY KEY, name varchar, health varchar, age varchar, type varchar);
-6. CREATE TABLE wildlife_tracker=# CREATE TABLE sightings (id serial PRIMARY KEY, animal_id int, location varchar, ranger_name varchar, timestamp timestamp);
-7. CREATE DATABASE wildlife_tracker_test WITH TEMPLATE wildlife_tracker;
-```
-## User Requirements
-```bash
-The applications allow users to do the following:
-1.Add a new animal
-2.Add an endangered animal
-3.Add an animal Sighting
+  This is a simple java application that allows Rangers to track wildlife sightings in a given area and tracks wildlife categories such as all the animals and the endangered ones
 
-```
+### Live Link
 
-## Contact Details
-```bash
-You can contact me at pwachira900@gmail.com
-```
+### Prerequisites
 
-## License
-- This project is licensed under the MIT Open Source license Copyright (c) 2019. [LICENCE](https://github.com/peter-wachira/WildlifeTracker/blob/master/LICENCE)
+ * An up-to-date browser, preferably chrome or mozilla
+ * Internet connection
 
-[![forthebadge](https://forthebadge.com/images/badges/fuck-it-ship-it.svg)](https://forthebadge.com)
-[![forthebadge](https://forthebadge.com/images/badges/makes-people-smile.svg)](https://forthebadge.com)
+
+### Technologies used
+
+   * JAVA
+   * Gradle
+   * Spark
+   * Postgres SQL
+   * HTML
+   * CSS & Bootstrap
+   * Junit
+
+### Installation guide :notebook:
+
+  If you want to use this as your template, here's how to go about it:
+
+  * Install Git on you machine
+  * Maneouver to 'clone or download' button and get the link
+  * --Linux Users-- open your terminal and run the 'git clone ...' command in a directory of your choice
+  * --for Windows Users-- Navigate to the location you'd want the repository located, right click and select "git bash here"
+  * Clone the repository
+  * Upon completion, navigate to the cloned repository
+  Feel free to edit the files to your prefered taste
+
+  * Now build the Database to enable storing of created instances
+  * Install Postgres SQL
+  * run the following commands in your terminal
+
+        CREATE DATABASE wildlife_tracker;
+
+        CREATE TABLE animals (id serial PRIMARY KEY, name varchar);
+
+        CREATE TABLE sightings (id serial PRIMARY KEY, location varchar, rangerName varchar);
+
+        CREATE DATABASE wildlife_tracker_test;
+
+         CREATE DATABASE wildlife_tracker_test WITH TEMPLATE wildlife_tracker;
+
+
+### LICENSE
+ This website is under the MIT license which can be found [HERE](LICENSE).
+ Copyright (c) 2021 Waruguru Muriithi
