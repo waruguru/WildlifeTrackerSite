@@ -8,8 +8,8 @@ group 'com.wildlifetracker.peter'
 version '1.0-SNAPSHOT'
 
 
-archivesBaseName = "WildlifeTracker"
-applicationName = "WildlifeTracker"
+archivesBaseName = "WildlifeTrackerSite"
+applicationName = "wildlifetrackersite-moringa"
 mainClassName = "App"
 sourceCompatibility = 1.8
 
