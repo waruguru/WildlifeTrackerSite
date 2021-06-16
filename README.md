@@ -8,9 +8,7 @@
 
 
 ### Live Link
-x-special/nautilus-clipboard
-copy
-file:///home/moringa/Desktop/wildlife1%20transfer/README.md
+https://joycewildlifetracker.herokuapp.com/
 
 
 ### Prerequisites
