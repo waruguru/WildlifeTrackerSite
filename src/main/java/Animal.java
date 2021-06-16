@@ -1,114 +1,101 @@
-import java.sql.Connection;
+import org.sql2o.*;
+
 import java.util.List;
 
-public class Animal {
-    public int id;
-    public String name;
-    public String type;
-    //creating animal with constant non endangered
-    public static final String ANIMAL_TYPE = "Non-endangered";
-
-    public Animal(String name){
-        if (name.equals("")){
-            //throw exception if no name is entered
-            throw new IllegalArgumentException("Please enter an animal name.");
-        }
-        this.name = name;
-
-        type = ANIMAL_TYPE;
+public class Animal{
+    private String endangered;
+    private String animal;
+    private String health;
+    private String age;
+    private int id;
+    
+    public Animal(String animal, String endangered, String health, String age){
+        this.animal = animal;
+        this.endangered = endangered;
+        this.health = health;
+        this.age = age;
     }
 
-
-    public String getName(){
-        return name;
+    public String getEndangered(){
+        return endangered;
     }
 
-    public int getId() {
+    public String getAnimal(){
+        return animal;
+    }
+    public String getHealth(){
+        return health;
+    }
+    public String age(){
+        return age;
+    }
+    public int getId(){
         return id;
     }
 
-    public String getType() {
-        return type;
-    }
-    // setting animal name
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    // overriding Animal
-    @Override
-    public boolean equals(Object otherAnimal) {
-        if (otherAnimal instanceof Animal) {
-            Animal newAnimal = (Animal) otherAnimal;
-            return (this.getName().equals(newAnimal.getName()));
-        }
-
-        return false;
-    }
-
-    //saving a new animal by their name and type
-    public void save() {
-        String sql = "INSERT INTO animals (name, type) VALUES (:name, :type)";
-        try(Connection con = DataBase.sql2o.open()) {
+    public void save(){
+        try(Connection con = DB.sql2o.open()){
+            String sql = "INSERT INTO animal(animal, endangered, health, age) VALUES(:animal, :endangered, :health, :age)";
             this.id = (int) con.createQuery(sql, true)
-                    .addParameter("name", name)
-                    .addParameter("type", type)
-                    .throwOnMappingFailure(false)
-                    .executeUpdate()
-                    .getKey();
+            .addParameter("animal", this.animal)
+            .addParameter("endangered", this.endangered)
+            .addParameter("health", this.health)
+            .addParameter("age", this.age)
+            .throwOnMappingFailure(false)
+            .executeUpdate()
+            .getKey();
+
         }
     }
-
-    // deleting an animal and a sighting using their Id && throwing  exception incase the id is not mapped
-    public void delete() {
-        try(Connection con = DataBase.sql2o.open()) {
-            String sql = "DELETE from animals WHERE id = :id";
-            con.createQuery(sql)
-                    .addParameter("id", id)
-                    .throwOnMappingFailure(false)
-                    .executeUpdate();
-            String sql2 = "DELETE from sightings WHERE animal_id = :id";
-            con.createQuery(sql2)
-                    .addParameter("id", id)
-                    .throwOnMappingFailure(false)
-                    .executeUpdate();
-        }
-    }
-
-    //Listing all animals from animals table
+    
     public static List<Animal> all() {
-        String sql = "SELECT * FROM animals;";
+        String sql = "select * from animal";
+        try(Connection con = DB.sql2o.open()) {
+           return con.createQuery(sql)
+           .throwOnMappingFailure(false)
+           .executeAndFetch(Animal.class);
+        }
+    }
+    
 
-        try (Connection con = DataBase.sql2o.open()) {
-            return con.createQuery(sql)
-                    .throwOnMappingFailure(false)
-                    .executeAndFetch(Animal.class);
+    public static String getAnimalName(int id) {
+        String sql = "select animal from animal where id = :id;";
+        try(Connection con = DB.sql2o.open()) {
+           String name = con.createQuery(sql)
+           .addParameter("id", id)
+           .executeScalar(String.class);
+           return name;
         }
     }
 
-    //finding an animal using its id && throwing  exception incase the id is not mapped
-    public static Animal find(int id) {
-        String sql = "SELECT * FROM animals WHERE id = :id;";
-
-        try (Connection con = DataBase.sql2o.open()) {
-            return con.createQuery(sql)
-                    .addParameter("id", id)
-                    .throwOnMappingFailure(false)
-                    .executeAndFetchFirst(Animal.class);
+    public static String getAnimalEndangered(int id) {
+        String sql = "select endangered from animal where id = :id;";
+        try(Connection con = DB.sql2o.open()) {
+           String endangered = con.createQuery(sql)
+           .addParameter("id", id)
+           .executeScalar(String.class);
+           return endangered;
         }
     }
 
-    //updating an animal using its Id && throwing an exception incase it is not mapped
-    public void update() {
-        String sql = "UPDATE animals SET name = :name WHERE id = :id";
-
-        try(Connection con = DataBase.sql2o.open()) {
-            con.createQuery(sql)
-                    .addParameter("name", name)
-                    .addParameter("id", id)
-                    .throwOnMappingFailure(false)
-                    .executeUpdate();
+    public static String getAnimalHealth(int id) {
+        String sql = "select health from animal where id = :id;";
+        try(Connection con = DB.sql2o.open()) {
+           String health = con.createQuery(sql)
+           .addParameter("id", id)
+           .executeScalar(String.class);
+           return health;
         }
     }
 
+    public static String getAnimalAge(int id) {
+        String sql = "select age from animal where id = :id;";
+        try(Connection con = DB.sql2o.open()) {
+           String age = con.createQuery(sql)
+           .addParameter("id", id)
+           .executeScalar(String.class);
+           return age;
+        }
+    }
 }
+
